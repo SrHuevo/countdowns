@@ -8,6 +8,9 @@ $(function () {
 
     if(window.location.href.indexOf("?") !== -1) {
     	$("#makecountdown").hide();
+    	$("#view-countdown").hide();
+    } else {
+    	$("#make-countdown").hide();
     }
 
     var countdown = new Countdown();
@@ -32,13 +35,12 @@ $(function () {
 
     $("#make-countdown").click(function(){
     	$("#makecountdown").show();
-    	var $parent = $(this).parent();
-    	this.remove();
-    	var verResultado = $('<button class="btn btn-success">Ver Resultado</button>');
-    	verResultado.click(function(){
-    		window.location = $makerurl.val();
-    	});
-    	$parent.append(verResultado);
+    	$("#view-countdown").show();
+    	$(this).hide();
+    });
+
+    $("#view-countdown").click(function(){
+		window.location = $makerurl.val();
     });
 
 });
