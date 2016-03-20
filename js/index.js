@@ -1,54 +1,44 @@
-var date = new Date();
-date.setDate(24);
-date.setHours(17);
-date.setMinutes(0);
-date.setSeconds(0);
+$(function () {
+    $('#maker-calendario').datetimepicker({
+        inline: true,
+        sideBySide: true,
+        viewMode: 'years',
+        format: 'YYYYMMDDHHmmss'
+    });
 
+    if(window.location.href.indexOf("?") !== -1) {
+    	$("#makecountdown").hide();
+    }
 
-setInterval(function(){
-		var time = date - new Date();
-		var dias = Math.floor(time / 3600000 / 24);
-		if(dias >= 1){
-			$("#dias").html(dias);
-			if(dias == 1) {
-				$("#dias-text").html("dia");
-			}else{
-				$("#dias-text").html("dias");
-			}
-			time -= dias * 3600000 * 24;
-		} else {
-			$("#dias").html(0);
-		}
-		var horas = Math.floor(time / 3600000);
-		if(horas >= 1){
-			$("#horas").html(horas);
-			if(dias == 1) {
-				$("#horas-text").html("hora");
-			}else{
-				$("#horas-text").html("horas");
-			}
-			time -= horas * 3600000;
-		} else {
-			$("#horas").html(0);
-		}
-		var minutos = Math.floor(time / 60000);
-		if(minutos >= 1){
-			$("#minutos").html(minutos);
-			if(dias == 1) {
-				$("#minutos-text").html("minuto");
-			}else{
-				$("#minutos-text").html("minutos");
-			}
-			time -= minutos * 60000;
-		} else {
-			$("#minutos").html(0);
-		}
-		var segundos = Math.floor(time / 1000);
-		if(segundos >= 1){
-			$("#segundos").html(segundos);
-			time -= segundos * 1000;
-		} else {
-			$("#segundos").html(0);
-		}
-		$("#milisegundos").html(time);
-	}, 53)
+    var countdown = new Countdown();
+
+    var $makerpageTitle = $("#maker-pagetitle");
+	var $makertitle = $("#maker-title");
+	var $makersubtitle = $("#maker-subtitle");
+	var $makerimg = $("#maker-img");
+	var $makerurl = $("#maker-url");
+
+	var $makercalendar = $("#maker-calendario");
+
+    var change = function(fields) {
+   	 	countdown.setDate(fields.calendar);
+    	document.title = fields.pageTitle;
+    	$("#titulo").html(fields.title);
+    	$("#subtitulo").html(fields.subtitle);
+    	$("#imagen-fondo").attr("src", fields.img);
+    }
+
+    var maker = new Maker($makerpageTitle, $makertitle, $makersubtitle, $makerimg, $makercalendar, $makerurl, change);
+
+    $("#make-countdown").click(function(){
+    	$("#makecountdown").show();
+    	var $parent = $(this).parent();
+    	this.remove();
+    	var verResultado = $('<button class="btn btn-success">Ver Resultado</button>');
+    	verResultado.click(function(){
+    		window.location = $makerurl.val();
+    	});
+    	$parent.append(verResultado);
+    });
+
+});
