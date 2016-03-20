@@ -6,48 +6,80 @@ function Countdown() {
 		var time = date - new Date();
 		var dias = Math.floor(time / 3600000 / 24);
 		if(dias >= 1){
-			$("#dias").html(dias);
-			if(dias == 1) {
-				$("#dias-text").html("dia");
-			}else{
-				$("#dias-text").html("dias");
+			if($("#dias").html() != dias){
+				$("#dias").html(dias);
 			}
 			time -= dias * 3600000 * 24;
 		} else {
-			$("#dias").html(0);
+			if($("#dias").html() != '0'){
+				$("#dias").html(0);
+			}
+		}
+		if(dias == 1) {
+			if($("#dias-text").html() !== "dia"){
+				$("#dias-text").html("dia");
+			}
+		}else{
+			if($("#dias-text").html() !== "dias"){
+				$("#dias-text").html("dias");
+			}
 		}
 		var horas = Math.floor(time / 3600000);
 		if(horas >= 1){
-			$("#horas").html(horas);
-			if(dias == 1) {
-				$("#horas-text").html("hora");
-			}else{
-				$("#horas-text").html("horas");
+			if($("#horas").html() != horas){
+				$("#horas").html(horas);
 			}
 			time -= horas * 3600000;
 		} else {
-			$("#horas").html(0);
+			if($("#horas").html() != '0'){
+				$("#horas").html(0);
+			}
+		}
+		if(horas == 1) {
+			if($("#horas-text").html() !== "hora"){
+				$("#horas-text").html("hora");
+			}
+		}else{
+			if($("#horas-text").html() !== "horas"){
+				$("#horas-text").html("horas");
+			}
 		}
 		var minutos = Math.floor(time / 60000);
 		if(minutos >= 1){
-			$("#minutos").html(minutos);
-			if(dias == 1) {
-				$("#minutos-text").html("minuto");
-			}else{
-				$("#minutos-text").html("minutos");
+			if($("#minutos").html() != minutos){
+				$("#minutos").html(minutos);
 			}
 			time -= minutos * 60000;
 		} else {
-			$("#minutos").html(0);
+			if($("#minutos").html != '0'){
+				$("#minutos").html(0);
+			}
+		}
+		if(minutos == 1) {
+			if($("#minutos-text").html() !== "minuto"){
+				$("#minutos-text").html("minuto");
+			}
+		}else{
+			if($("#minutos-text").html() !== "minutos"){
+				$("#minutos-text").html("minutos");
+			}
 		}
 		var segundos = Math.floor(time / 1000);
 		if(segundos >= 1){
-			$("#segundos").html(segundos);
+			if($("#segundos").html() != segundos){
+				$("#segundos").html(segundos);
+			}
 			time -= segundos * 1000;
 		} else {
-			$("#segundos").html(0);
+			if($("#segundos").html() != '0'){
+				$("#segundos").html(0);
+			}
 		}
-		$("#milisegundos").html(time);
+		var milis = "";
+		if(time<10) milis="00"+time;
+		else if(time<100) milis="0"+time;
+		else milis = time;
+		$("#milisegundos").html(milis);
 	}
 
 	this.setDate = function(calendar) {
