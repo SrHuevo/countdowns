@@ -46,11 +46,11 @@ Maker.prototype.change = function(callback, url) {
 		}
 	} else {
 		var url = URL.getPath(window.location.href) + "?";
-		url += "pageTitle"+ "=" + this.$pageTitle.val();
-		url += "&" + "title" + "=" + this.$title.val();
-		url += "&" + "subtitle" + "=" + this.$subtitle.val();
-		url += "&" + "img" + "=" + this.$img.val();
-		url += "&" + "calendar" + "=" + this.$calendar.data().date;
+		url += "pageTitle"+ "=" + encodeURI(this.$pageTitle.val());
+		url += "&" + "title" + "=" + encodeURI(this.$title.val());
+		url += "&" + "subtitle" + "=" + encodeURI(this.$subtitle.val());
+		url += "&" + "img" + "=" + encodeURI(this.$img.val());
+		url += "&" + "calendar" + "=" + encodeURI(this.$calendar.data().date);
 		this.$url.val(url);
 	}
 	
