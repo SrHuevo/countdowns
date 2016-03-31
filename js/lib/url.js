@@ -7,7 +7,7 @@ var URL = {
 		}
 	    var hashes = url.substr(index + 1, url.length).split('&');
 	    for(var i = 0; i < hashes.length; i++) {
-	        var index = hashes[i].indwxOf("=");
+	        var index = hashes[i].indexOf("=");
 	        map[hashes[i].substr(0,index)] = decodeURI(hashes[i].substr(index+1));
 	    }
 		return map;
